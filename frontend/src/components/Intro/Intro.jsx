@@ -1,64 +1,77 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-export default function Intro() {
+export default function Intro({ onFinish }) {
   const greeting = [
+    "नमस्ते",
     "Hello",
+    "Bonjour",
+    "こんにちは",
     "this is",
     "Swayam Jaswal",
-    "Welcome to My",
-    "Portfolio"
   ];
 
   const [index, setIndex] = useState(0);
-  const [done, setDone] = useState(false);
+  const [hideIntro, setHideIntro] = useState(false);
+
   const textRef = useRef(null);
+  const containerRef = useRef(null);
 
   const isLast = index === greeting.length - 1;
 
+  // Word sequencing
   useEffect(() => {
-    if (isLast) {
-      const endTimer = setTimeout(() => setDone(true), 1800);
-      return () => clearTimeout(endTimer);
-    }
+    if (isLast) return;
 
     const timer = setTimeout(() => {
       setIndex((prev) => prev + 1);
-    }, 900);
+    }, 700);
 
     return () => clearTimeout(timer);
-  }, [index]);
+  }, [index, isLast]);
 
+  // Word animation
   useEffect(() => {
     if (!textRef.current) return;
 
-    const tl = gsap.timeline();
+    gsap.fromTo(
+      textRef.current,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: isLast ? 0.5 : 0.4,
+        ease: "power3.out",
+      }
+    );
+  }, [index, isLast]);
 
-    if (isLast) {
-      tl.fromTo(
-        textRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }
-      );
-    } else {
-      tl.fromTo(
-        textRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }
-      ).to(
-        textRef.current,
-        { opacity: 0, y: -20, duration: 0.3, ease: "power3.in" },
-        "+=0.3"
-      );
-    }
-  }, [index]);
+  // Exit intro
+  useEffect(() => {
+    if (!isLast) return;
 
-  if (done) return null;
+    const exitTimer = setTimeout(() => {
+      gsap.to(containerRef.current, {
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.inOut",
+        onComplete: () => {
+          setHideIntro(true);
+          onFinish();
+        },
+      });
+    }, 1200);
+
+    return () => clearTimeout(exitTimer);
+  }, [isLast, onFinish]);
+
+  if (hideIntro) return null;
 
   return (
-    <div 
-        className="fixed inset-0 flex items-center justify-center"
-        style={{ background: "var(--grad-carbon)" }}
+    <div
+      ref={containerRef}
+      className="fixed inset-0 flex items-center justify-center"
+      style={{ background: "var(--grad-carbon)" }}
     >
       <div
         ref={textRef}

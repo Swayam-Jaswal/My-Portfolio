@@ -1,12 +1,17 @@
-import './App.css'
-import Intro from './components/Intro/Intro'
+import { useState } from "react";
+import Intro from "./components/Intro/Intro";
+import Home from "./pages/Home";
 
-function App() {
+export default function App() {
+  const [introDone, setIntroDone] = useState(false);
+
   return (
     <>
-      <Intro/>
-    </>
-  )
-}
+      <Home />
 
-export default App
+      {!introDone && (
+        <Intro onFinish={() => setIntroDone(true)} />
+      )}
+    </>
+  );
+}
