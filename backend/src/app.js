@@ -19,8 +19,6 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
-app.use(morgan("dev"));
-app.use(helmet());
 
 app.use("/api/projects", projectRoutes);
 app.use("/api/profile", profileRoutes);

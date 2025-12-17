@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import profileImg from "../../assets/swayam 4.png";
+import profileImg from "../../assets/swayam 6.png";
+import ScrollButton from "../UI/ScrollButton";
 
 export default function Hero({ show }) {
   const leftRef = useRef(null);
@@ -33,9 +34,7 @@ export default function Hero({ show }) {
           ref={leftRef}
           className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 ml-10"
         >
-          <h1 className="text-5xl font-bold">
-            Swayam Jaswal
-          </h1>
+          <h1 className="text-5xl font-bold">Swayam Jaswal</h1>
 
           <h2 className="text-4xl font-semibold leading-tight">
             I am a <br />
@@ -43,7 +42,9 @@ export default function Hero({ show }) {
           </h2>
 
           <p className="text-gray-400 max-w-md">
-            I am a Full Stack Developer passionate about creating scalable, high-performance web applications using the MERN stack, combining clean backend architecture with modern, responsive front-end design.
+            I am a Full Stack Developer passionate about creating scalable,
+            high-performance web applications using the MERN stack, combining
+            clean backend architecture with modern, responsive front-end design.
           </p>
 
           {/* Mobile Image */}
@@ -56,13 +57,21 @@ export default function Hero({ show }) {
             />
           </div>
 
+          {/* Buttons */}
           <div className="flex gap-4 pt-4 justify-center lg:justify-start">
-            <button className="px-6 py-3 bg-white text-black rounded-md">
+            <ScrollButton
+              targetId="projects"
+              className="bg-white text-black hover:bg-gray-200"
+            >
               View Projects
-            </button>
-            <button className="px-6 py-3 border border-white rounded-md">
+            </ScrollButton>
+
+            <ScrollButton
+              targetId="contact"
+              className="border border-white hover:bg-white hover:text-black"
+            >
               Contact Me
-            </button>
+            </ScrollButton>
           </div>
         </div>
 

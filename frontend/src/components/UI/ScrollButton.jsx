@@ -1,4 +1,8 @@
-export default function ScrollButton({ targetId, children, className = "" }) {
+export default function ScrollButton({
+  targetId,
+  children,
+  className = "",
+}) {
   const handleClick = () => {
     const section = document.getElementById(targetId);
     if (section) {
@@ -9,7 +13,7 @@ export default function ScrollButton({ targetId, children, className = "" }) {
   return (
     <button
       onClick={handleClick}
-      className={`px-6 py-3 rounded-md font-medium transition ${className}`}
+      className={`px-6 py-3 rounded-md font-medium transition duration-300 ${className}`}
     >
       {children}
     </button>
