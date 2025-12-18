@@ -1,3 +1,6 @@
+import { FaGithub } from "react-icons/fa";
+import defaultThumbnail from "../../assets/default-project-thumbnail 1.png";
+
 export default function ProjectCard({
   title,
   description,
@@ -5,40 +8,35 @@ export default function ProjectCard({
   techStack = [],
   liveLink,
   githubLink,
-  status = "completed", // "completed" | "in-progress"
+  status = "completed",
 }) {
   const isInProgress = status === "in-progress";
 
-  return (
-    <div className="relative bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden transition duration-300 hover:scale-[1.02]">
+  const thumbnail =
+    image && image.trim() !== "" ? image : defaultThumbnail;
 
-      {/* Status Badge */}
+  return (
+    <div className="relative border border-white/10 rounded-xl overflow-hidden transition duration-300 hover:scale-[1.02]">
+
       {isInProgress && (
         <span className="absolute top-4 right-4 z-10 text-xs px-3 py-1 rounded-full bg-yellow-500 text-black font-semibold">
           In Development
         </span>
       )}
 
-      {/* Project Image */}
+      {/* Thumbnail */}
       <div className="relative">
-        {image ? (
-          <img
-            src={image}
-            alt={title}
-            className={`w-full h-48 object-cover ${
-              isInProgress ? "opacity-60 blur-[1px]" : ""
-            }`}
-          />
-        ) : (
-          <div className="w-full h-48 bg-zinc-800 flex items-center justify-center text-gray-400 text-sm">
-            Image Coming Soon
-          </div>
-        )}
+        <img
+          src={thumbnail}
+          alt={title}
+          className={`w-full h-48 object-cover ${
+            isInProgress ? "opacity-60 blur-[1px]" : ""
+          }`}
+        />
 
-        {/* Overlay for in-progress */}
         {isInProgress && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="bg-black/70 px-4 py-2 rounded-md text-sm">
+            <span className="bg-black/70 px-4 py-2 rounded-md text-sm text-white">
               Live Soon 🚀
             </span>
           </div>
@@ -47,9 +45,11 @@ export default function ProjectCard({
 
       {/* Content */}
       <div className="p-6 space-y-4">
-        <h3 className="text-xl font-semibold">{title}</h3>
+        <h3 className="text-xl font-semibold text-[var(--text-primary)]">
+          {title}
+        </h3>
 
-        <p className="text-gray-400 text-sm">
+        <p className="text-sm text-[var(--text-secondary)]">
           {description}
         </p>
 
@@ -59,7 +59,7 @@ export default function ProjectCard({
             {techStack.map((tech, index) => (
               <span
                 key={index}
-                className="text-xs px-3 py-1 bg-zinc-800 rounded-full"
+                className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[var(--text-secondary)]"
               >
                 {tech}
               </span>
@@ -67,14 +67,14 @@ export default function ProjectCard({
           </div>
         )}
 
-        {/* Actions */}
-        <div className="flex gap-4 pt-4">
+        {/* Links */}
+        <div className="flex items-center gap-4 pt-4">
           {!isInProgress && liveLink && (
             <a
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm underline hover:text-gray-300"
+              className="text-sm underline text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
             >
               Live
             </a>
@@ -85,14 +85,26 @@ export default function ProjectCard({
               href={githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm underline hover:text-gray-300"
+              className="
+                group
+                flex items-center justify-center
+                w-9 h-9
+                rounded-full
+                border border-white/10
+                text-[var(--text-secondary)]
+                hover:text-[var(--text-primary)]
+                hover:border-[var(--text-primary)]
+                hover:scale-105
+                transition
+              "
+              aria-label="GitHub Repository"
             >
-              GitHub
+              <FaGithub className="text-lg" />
             </a>
           )}
 
           {isInProgress && (
-            <span className="text-sm text-gray-500 italic">
+            <span className="text-sm italic text-[var(--text-secondary)]">
               Live Soon
             </span>
           )}

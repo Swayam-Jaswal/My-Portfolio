@@ -3,12 +3,10 @@ import gsap from "gsap";
 
 export default function Intro({ onFinish }) {
   const greeting = [
-    "नमस्ते",
     "Hello",
+    "नमस्ते",
     "Bonjour",
     "こんにちは",
-    "this is",
-    "Swayam Jaswal",
   ];
 
   const [index, setIndex] = useState(0);
@@ -19,21 +17,16 @@ export default function Intro({ onFinish }) {
 
   const isLast = index === greeting.length - 1;
 
-  // Word sequencing
   useEffect(() => {
     if (isLast) return;
-
     const timer = setTimeout(() => {
       setIndex((prev) => prev + 1);
     }, 700);
-
     return () => clearTimeout(timer);
   }, [index, isLast]);
 
-  // Word animation
   useEffect(() => {
     if (!textRef.current) return;
-
     gsap.fromTo(
       textRef.current,
       { opacity: 0, y: 30 },
@@ -46,10 +39,8 @@ export default function Intro({ onFinish }) {
     );
   }, [index, isLast]);
 
-  // Exit intro
   useEffect(() => {
     if (!isLast) return;
-
     const exitTimer = setTimeout(() => {
       gsap.to(containerRef.current, {
         opacity: 0,
@@ -71,12 +62,11 @@ export default function Intro({ onFinish }) {
     <div
       ref={containerRef}
       className="fixed inset-0 flex items-center justify-center"
-      style={{ background: "var(--grad-carbon)" }}
+      style={{ background: "var(--background-color)" }}
     >
       <div
         ref={textRef}
-        className="text-5xl font-semibold tracking-wide"
-        style={{ color: "var(--intro-text)" }}
+        className="text-5xl font-semibold tracking-wide text-[var(--text-primary)]"
       >
         {greeting[index]}
       </div>

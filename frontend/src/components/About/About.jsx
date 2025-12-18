@@ -54,7 +54,7 @@ export default function About() {
   }, []);
 
   const pill =
-    "px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm transition-all hover:bg-cyan-400/10 hover:border-cyan-400/40 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]";
+    "px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm transition-all";
 
   return (
     <section
@@ -66,24 +66,19 @@ export default function About() {
 
         {/* LEFT */}
         <div ref={leftRef} className="space-y-6 max-w-xl">
-          <span className="text-cyan-400 font-medium">
-            About Me
-          </span>
+          <span className="text-cyan-400 font-medium">About Me</span>
 
-          <h2 className="text-4xl sm:text-5xl font-bold leading-tight">
+          <h2 className="text-4xl sm:text-5xl font-bold leading-tight text-[var(--text-primary)]">
             Passionate about <br />
-            <span className="text-cyan-400">
-              crafting solutions
-            </span>
+            <span className="text-cyan-400">crafting solutions</span>
           </h2>
 
-          <p className="text-gray-400 leading-relaxed">
+          <p className="text-[var(--text-secondary)] leading-relaxed">
             I'm a full-stack developer passionate about building scalable,
-            high-performance web applications with clean architecture and
-            modern UI.
+            high-performance web applications with clean architecture and modern UI.
           </p>
 
-          <p className="text-gray-400 leading-relaxed">
+          <p className="text-[var(--text-secondary)] leading-relaxed">
             I focus on writing maintainable code, learning continuously, and
             delivering polished digital experiences.
           </p>
@@ -99,50 +94,75 @@ export default function About() {
         {/* RIGHT */}
         <div ref={rightRef} className="space-y-10">
 
-          {/* SKILLS */}
-          <div className="space-y-6">
-
-            <div>
-              <h3 className="text-sm text-gray-400 mb-3 tracking-widest">
-                FRONTEND
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {["React", "Next.js", "TypeScript", "Tailwind CSS"].map(
-                  (skill) => (
-                    <span key={skill} className={pill}>
-                      {skill}
-                    </span>
-                  )
-                )}
-              </div>
+          {/* FRONTEND */}
+          <div>
+            <h3 className="text-sm mb-3 tracking-widest text-[var(--text-secondary)]">
+              FRONTEND
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {["React.js", "HTML5", "CSS3", "Tailwind CSS"].map((skill) => (
+                <span key={skill} className={pill}>
+                  {skill}
+                </span>
+              ))}
             </div>
+          </div>
 
-            <div>
-              <h3 className="text-sm text-gray-400 mb-3 tracking-widest">
-                BACKEND
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {["Node.js", "Express", "MongoDB", "PostgreSQL"].map(
-                  (skill) => (
-                    <span key={skill} className={pill}>
-                      {skill}
-                    </span>
-                  )
-                )}
-              </div>
+          {/* BACKEND & APIs */}
+          <div>
+            <h3 className="text-sm mb-3 tracking-widest text-[var(--text-secondary)]">
+              BACKEND & APIs
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {["Node.js", "Express.js"].map((skill) => (
+                <span key={skill} className={pill}>
+                  {skill}
+                </span>
+              ))}
             </div>
+          </div>
 
-            <div>
-              <h3 className="text-sm text-gray-400 mb-3 tracking-widest">
-                TOOLS
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {["Git", "Docker", "AWS", "Figma"].map((skill) => (
+          {/* DATABASES */}
+          <div>
+            <h3 className="text-sm mb-3 tracking-widest text-[var(--text-secondary)]">
+              DATABASES
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {["MongoDB", "PostgreSQL", "Redis"].map((skill) => (
+                <span key={skill} className={pill}>
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* CLOUD & DEVOPS */}
+          <div>
+            <h3 className="text-sm mb-3 tracking-widest text-[var(--text-secondary)]">
+              CLOUD & DEVOPS
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {["Docker", "AWS", "GitHub Actions", "CI/CD Pipelines"].map(
+                (skill) => (
                   <span key={skill} className={pill}>
                     {skill}
                   </span>
-                ))}
-              </div>
+                )
+              )}
+            </div>
+          </div>
+
+          {/* TOOLS */}
+          <div>
+            <h3 className="text-sm mb-3 tracking-widest text-[var(--text-secondary)]">
+              TOOLS
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {["Git", "GitHub", "VS Code", "Blender"].map((skill) => (
+                <span key={skill} className={pill}>
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -151,7 +171,7 @@ export default function About() {
             {[
               { label: "Years Exp.", value: 2 },
               { label: "Projects", value: 10 },
-              { label: "Clients", value: 5 },
+              { label: "Clients", value: 1 },
             ].map((stat, i) => (
               <div key={stat.label}>
                 <p
@@ -161,7 +181,7 @@ export default function About() {
                 >
                   0
                 </p>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-[var(--text-secondary)]">
                   {stat.label}
                 </p>
               </div>

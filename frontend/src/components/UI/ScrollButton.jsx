@@ -13,7 +13,7 @@ export default function ScrollButton({
   return (
     <button
       onClick={handleClick}
-      className={`px-6 py-3 rounded-md font-medium transition duration-300 ${className}`}
+      className={`px-6 py-3 rounded-md font-medium transition duration-300 text-[var(--text-primary)] ${className}`}
     >
       {children}
     </button>
