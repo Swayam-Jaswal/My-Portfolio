@@ -14,6 +14,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full flex justify-center px-4">
+      {/* done */}
       {/* Capsule container */}
       <div
         className="
