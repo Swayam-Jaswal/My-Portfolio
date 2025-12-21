@@ -5,10 +5,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navItems = [
-    { label: "About", id: "about" },
     { label: "Work", id: "projects" },
     { label: "Resume", id: "resume" },
-    { label: "Skills", id: "about" },
+    { label: "About", id: "about" },
+    // { label: "Skills", id: "about" },
     { label: "Contact", id: "contact" },
   ];
 

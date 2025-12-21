@@ -1,10 +1,31 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
+import gsap from "gsap";
 
 export default function Contact() {
+  const sectionRef = useRef(null);
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".contact-animate", {
+        autoAlpha: 0,
+        y: 40,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          once: true,
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -32,8 +53,13 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="min-h-screen px-6 sm:px-20 py-32">
-      <div className="text-center max-w-2xl mx-auto mb-20">
+    <section
+      ref={sectionRef}
+      id="contact"
+      className="min-h-screen px-6 sm:px-20 py-32"
+    >
+      {/* HEADER */}
+      <div className="contact-animate text-center max-w-2xl mx-auto mb-20">
         <span className="text-cyan-400 font-medium">
           Get in Touch
         </span>
@@ -49,9 +75,12 @@ export default function Contact() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-
         {/* FORM */}
-        <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
+        <form
+          ref={formRef}
+          onSubmit={sendEmail}
+          className="contact-animate space-y-6"
+        >
           {["Name", "Email"].map((label, i) => (
             <div key={i}>
               <label className="block text-sm mb-2 text-[var(--text-secondary)]">
@@ -100,7 +129,7 @@ export default function Contact() {
         </form>
 
         {/* INFO */}
-        <div className="space-y-8">
+        <div className="contact-animate space-y-8">
           <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
             <h3 className="text-xl font-semibold text-[var(--text-primary)]">
               Open for opportunities
@@ -121,7 +150,6 @@ export default function Contact() {
             </p>
           </div>
         </div>
-
       </div>
     </section>
   );

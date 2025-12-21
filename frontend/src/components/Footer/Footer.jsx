@@ -1,12 +1,38 @@
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import ScrollButton from "../UI/ScrollButton";
 
 export default function Footer() {
+  const footerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".footer-animate", {
+        autoAlpha: 0,
+        y: 30,
+        stagger: 0.2,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <footer className="border-t border-white/10 px-6 sm:px-20 py-14">
+    <footer
+      ref={footerRef}
+      className="border-t border-white/10 px-6 sm:px-20 py-14"
+    >
       {/* Top section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+      <div className="footer-animate grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
 
         {/* LEFT – BRAND */}
         <div className="space-y-4">
@@ -112,14 +138,13 @@ export default function Footer() {
       </div>
 
       {/* Divider */}
-      <div className="my-10 border-t border-white/10" />
+      <div className="footer-animate my-10 border-t border-white/10" />
 
       {/* Bottom section */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--text-secondary)] text-center sm:text-left">
+      <div className="footer-animate flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--text-secondary)] text-center sm:text-left">
         <span>
           © {new Date().getFullYear()} Swayam Jaswal. All rights reserved.
         </span>
-
       </div>
     </footer>
   );

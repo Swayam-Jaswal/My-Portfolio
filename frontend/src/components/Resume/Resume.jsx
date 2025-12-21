@@ -1,14 +1,39 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
 import { DOCUMENTS } from "../../constants/Documents";
 import ResumePreviewModal from "./ResumePreviewModal";
 
 export default function Resume() {
   const [previewDoc, setPreviewDoc] = useState(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".resume-animate", {
+        autoAlpha: 0,
+        y: 40,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          once: true,
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="resume" className="min-h-screen px-6 sm:px-20 py-32">
+    <section
+      ref={sectionRef}
+      id="resume"
+      className="min-h-screen px-6 sm:px-20 py-32"
+    >
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto mb-20">
+      <div className="resume-animate text-center max-w-2xl mx-auto mb-20">
         <h2 className="text-4xl sm:text-5xl font-bold text-[var(--text-primary)]">
           My <span className="text-cyan-400">Resume</span>
         </h2>
@@ -28,7 +53,7 @@ export default function Resume() {
       {/* Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* EXPERIENCE */}
-        <div>
+        <div className="resume-animate">
           <h3 className="text-xl font-semibold mb-6 text-[var(--text-primary)]">
             Experience
           </h3>
@@ -67,7 +92,7 @@ export default function Resume() {
         {/* EDUCATION & CERTIFICATIONS */}
         <div className="space-y-12">
           {/* Education */}
-          <div>
+          <div className="resume-animate">
             <h3 className="text-xl font-semibold mb-6 text-[var(--text-primary)]">
               Education
             </h3>
@@ -107,7 +132,7 @@ export default function Resume() {
           </div>
 
           {/* Certifications */}
-          <div>
+          <div className="resume-animate">
             <h3 className="text-xl font-semibold mb-6 text-[var(--text-primary)]">
               Certifications
             </h3>

@@ -6,7 +6,6 @@ import ScrollButton from "../UI/ScrollButton";
 export default function Hero({ show }) {
   const contentRef = useRef(null);
   const imageRef = useRef(null);
-  const arrowRef = useRef(null);
 
   useEffect(() => {
     if (!show) return;
@@ -14,25 +13,23 @@ export default function Hero({ show }) {
     gsap.fromTo(
       contentRef.current,
       { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+      }
     );
 
     gsap.fromTo(
       imageRef.current,
       { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 1.1, ease: "power3.out" }
-    );
-
-    gsap.fromTo(
-      arrowRef.current,
-      { y: 0, opacity: 0.6 },
       {
-        y: 12,
         opacity: 1,
-        duration: 1.2,
-        ease: "power1.inOut",
-        repeat: -1,
-        yoyo: true,
+        scale: 1,
+        duration: 1.1,
+        ease: "power3.out",
+        delay: 0.2,
       }
     );
   }, [show]);
@@ -84,7 +81,7 @@ export default function Hero({ show }) {
             />
           </div>
 
-          {/* CTA */}
+          {/* CTA BUTTONS */}
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-4">
             <ScrollButton
               targetId="projects"
@@ -102,7 +99,7 @@ export default function Hero({ show }) {
           </div>
         </div>
 
-        {/* RIGHT : IMAGE */}
+        {/* RIGHT : IMAGE (DESKTOP ONLY) */}
         <div className="hidden lg:flex justify-center">
           <img
             ref={imageRef}
@@ -111,20 +108,6 @@ export default function Hero({ show }) {
             className="w-[560px] xl:w-[620px] h-auto object-contain"
           />
         </div>
-      </div>
-
-      {/* SCROLL INDICATOR */}
-      <div
-        ref={arrowRef}
-        className="
-          absolute bottom-8 sm:bottom-10
-          left-1/2 -translate-x-1/2
-          text-[var(--text-secondary)]
-          text-2xl sm:text-3xl
-          pointer-events-none
-        "
-      >
-        ↓
       </div>
     </section>
   );
